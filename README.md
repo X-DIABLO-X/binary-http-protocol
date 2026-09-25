@@ -20,6 +20,7 @@
 8. [Annotated Hexdump Breakdown](#annotated-hexdump-breakdown)
 9. [Independent "Stranger" Client Verification](#independent-stranger-client-verification)
 10. [Quickstart & Usage](#quickstart--usage)
+11. [`calculator/` — JC/1 Binary Calculator & File Server](#calculator--jc1-binary-calculator--file-server)
 
 ---
 
@@ -229,6 +230,40 @@ make test
 # Piping body output directly:
 ./bcurl localhost:9000/style.css > downloaded.css
 ```
+
+---
+
+## 🧮 `calculator/` — JC/1 Binary Calculator & File Server
+
+The `calculator/` folder contains a second, separate implementation for the *"Build a calculator that stays on the line"* assignment. It is a C++17 TCP server and client using its own binary protocol, **JC/1**, and it is not part of the BHTTP/1.0 protocol above.
+
+What is inside `calculator/`:
+
+| Path | Contents |
+|---|---|
+| `README.md` | Full documentation: build steps, usage, error codes, and JC/1 frame format |
+| `CMakeLists.txt` | CMake build file that produces the `serve` (server) and `b` (client) executables |
+| `src/serve.cpp` | Server: accepts connections, handles calculator routes and file requests |
+| `src/b.cpp` | Client: the `b curl` command, which sends one or more requests over one connection |
+| `src/protocol.hpp` | JC/1 frame encoding and decoding |
+| `src/net.hpp` | Cross-platform socket helpers (Winsock on Windows, POSIX sockets elsewhere) |
+| `www/index.html` | Sample file for testing the file-serving path |
+| `docs/annotated-capture.md` | Byte-level example of a client/server exchange |
+| `docs/protocol-spec.pdf` | JC/1 protocol specification |
+
+Calculator routes: `/add`, `/sub`, `/mul`, and `/div`, for example `GET /add?a=2&b=3` returns `200 5`.
+
+Quick start:
+
+```sh
+cd calculator
+cmake -S . -B build
+cmake --build build --config Release
+./serve ./www 9000                                  # terminal 1
+./b curl "localhost:9000/add?a=2&b=3"               # terminal 2
+```
+
+See [calculator/README.md](calculator/README.md) for the full instructions.
 
 ---
 
