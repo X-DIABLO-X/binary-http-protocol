@@ -97,6 +97,12 @@ func (s *Server) Stop() error {
 	return nil
 }
 
+// ServeConnection services a single TCP connection until termination.
+func (s *Server) ServeConnection(conn net.Conn) {
+	s.connWg.Add(1)
+	s.handleConnection(conn)
+}
+
 // handleConnection manages persistent TCP connection sessions.
 func (s *Server) handleConnection(conn net.Conn) {
 	defer s.connWg.Done()
