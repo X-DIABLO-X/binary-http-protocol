@@ -7,6 +7,9 @@ all: build annotate test
 build:
 	go build -o bserve.exe ./cmd/bserve
 	go build -o bcurl.exe ./cmd/bcurl
+	@mkdir -p bin 2>/dev/null || true
+	GOOS=linux go build -o bin/bserve ./cmd/bserve
+	GOOS=linux go build -o bin/bcurl ./cmd/bcurl
 
 annotate:
 	go run ./cmd/annotate

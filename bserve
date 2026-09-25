@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [ -f "$DIR/bserve.exe" ]; then
+
+if [[ -f "$DIR/bserve.exe" ]] && [[ "$(uname -s)" =~ (MINGW|MSYS|CYGWIN) ]]; then
     exec "$DIR/bserve.exe" "$@"
-elif [ -f "$DIR/bserve" ]; then
-    exec "$DIR/bserve" "$@"
+elif [[ -x "$DIR/bin/bserve" ]]; then
+    exec "$DIR/bin/bserve" "$@"
+elif [[ -f "$DIR/bserve.exe" ]]; then
+    exec "$DIR/bserve.exe" "$@"
 else
     exec go run "$DIR/cmd/bserve" "$@"
 fi

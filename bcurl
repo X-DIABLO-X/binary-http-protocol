@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [ -f "$DIR/bcurl.exe" ]; then
+
+if [[ -f "$DIR/bcurl.exe" ]] && [[ "$(uname -s)" =~ (MINGW|MSYS|CYGWIN) ]]; then
     exec "$DIR/bcurl.exe" "$@"
-elif [ -f "$DIR/bcurl" ]; then
-    exec "$DIR/bcurl" "$@"
+elif [[ -x "$DIR/bin/bcurl" ]]; then
+    exec "$DIR/bin/bcurl" "$@"
+elif [[ -f "$DIR/bcurl.exe" ]]; then
+    exec "$DIR/bcurl.exe" "$@"
 else
     exec go run "$DIR/cmd/bcurl" "$@"
 fi
