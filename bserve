@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$DIR/bserve.exe" ]; then
+    exec "$DIR/bserve.exe" "$@"
+elif [ -f "$DIR/bserve" ]; then
+    exec "$DIR/bserve" "$@"
+else
+    exec go run "$DIR/cmd/bserve" "$@"
+fi

@@ -1,0 +1,5 @@
+Hello from BHTTP/1.0!
+This is a binary HTTP protocol implementation running over persistent TCP.
+Every request and response is framed with an 8-byte fixed header.
+Headers are compressed via HPACK-lite.
+Unknown frame types are cleanly skipped.

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$DIR/bcurl.exe" ]; then
+    exec "$DIR/bcurl.exe" "$@"
+elif [ -f "$DIR/bcurl" ]; then
+    exec "$DIR/bcurl" "$@"
+else
+    exec go run "$DIR/cmd/bcurl" "$@"
+fi

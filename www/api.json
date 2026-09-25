@@ -1,0 +1,13 @@
+{
+  "protocol": "BHTTP/1.0",
+  "tracks": [
+    { "track": 1, "name": "bserve", "role": "server" },
+    { "track": 2, "name": "bcurl", "role": "client" }
+  ],
+  "framing": {
+    "header_size_bytes": 8,
+    "fields": ["Length (24)", "Type (8)", "Flags (8)", "StreamID (24)"]
+  },
+  "compression": "HPACK-Lite",
+  "status": "ready"
+}

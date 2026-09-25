@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHTTP/1.0 - Binary HTTP Protocol</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to BHTTP/1.0</h1>
+        <p class="subtitle">Two Tracks, One Binary Protocol</p>
+        <div class="card">
+            <h2>Track 1 & Track 2 in Action</h2>
+            <p>You have successfully retrieved this page over a persistent binary-framed TCP connection!</p>
+            <ul>
+                <li><strong>Fixed 8-byte frame header:</strong> 24 / 8 / 8 / 24 bit alignment</li>
+                <li><strong>HPACK-lite header compression:</strong> 10 static indexed headers</li>
+                <li><strong>Persistent TCP session:</strong> Reusing the single connection</li>
+                <li><strong>Extensibility:</strong> Unknown frames skipped cleanly</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
